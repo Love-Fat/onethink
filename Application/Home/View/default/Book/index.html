@@ -1,0 +1,172 @@
+﻿<extend name="Public/base" />
+<block name="title">Book-{:C('WEB_SITE_TITLE')}</block>
+<block name="keywords">Book-{:C('WEB_SITE_KEYWORD')}</block>
+<block name="description">Book-{:C('WEB_SITE_DESCRIPTION')}</block>
+<block name="body">
+ <link rel="stylesheet" href="__CSS__/pikaday.css">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url(__IMG__/ti_bg.JPG) no-repeat top center">
+	</div>
+</section>
+<section class="main_bg">
+    <div class="container">
+        <div class="col-sm-12">
+            <Div class="col-sm-8 about_us">
+                <div class="message_table">
+                <div class="message_title">
+                <h3>My dear Friend:<br>
+If you are sure to join one tour of Xian Food Tour, Please fill in the blanks. After successful booking, you will receive an confirmation. If you have not received it, please chck your junk mail or contact us at xianfoodtour@jjj.com (待定)
+</h3>
+                </div>
+                              <SCRIPT language="JavaScript">
+function reloadcode(){
+var verify=document.getElementById('safecode');
+verify.setAttribute('src',"{:U('Book/verify')}?id="+Math.random());
+}
+</SCRIPT>
+<form name="message" id="message" action="{:U('Book/index')}" method="post">
+<input type="hidden" name="arc_title" value="{$arc_title}" />
+	                <div class="biaodan_table clear">
+	                    <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>Full Name<i>*</i></b></p>
+	                        <p class="biaodan_p"><input name="name" id='inp2' type="text" class="biao_in runcode"  /></p>
+	                    </span>
+	                    <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>Nationality<i>*</i></b></p>
+	                        <p class="biaodan_p"><input name="title" id='inp3' type="text" class="biao_in runcode"  /></p>
+	                    </span>
+	                    <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>Email<i>*</i></b></p>
+	                        <p class="biaodan_p"><input name="email" class="biao_in" type="text" value=""  /></p>
+	                    </span>
+	                     <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>Cell Phone<i>*</i></b></p>
+	                        <p class="biaodan_p"><input name="phone" class="biao_in" type="text" value=""  /></p>
+	                    </span>
+                        <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>party<i>*</i></b></p>
+	                        <p class="biaodan_p">
+	                        <select name="sex" class="biao_in4">
+	                          <option value='2'>2</option>
+	                          <option value='3'>3</option>
+	                          <option value='4'>4</option>
+                              <option value='5'>5</option>
+	                          <option value='6'>6</option>
+	                          <option value='7'>7</option>
+                              <option value='8'>8</option>
+	                          <option value='9'>9</option>
+	                        </select>
+	                        </p>
+	                    </span>
+	                    <span class="biaodan col-md-6">
+	                        <p class="biaodan_title"><b>Date<i>*</i></b></p>
+	                        <p class="biaodan_p"><input name="address" class="biao_in" type="text" id="datepicker"  /></p>
+	                    </span>
+	                    
+	                    <span class="biaodan col-md-12">
+	                        <p class="biaodan_title"><b>Tour Code<i>*</i></b></p>
+	                        <p class="biaodan_p"><input  name="verify" id="verify" class="biao_in" type="text" value=""  /></p>
+                            <p class="biaodan_p">
+                              <img alt="点击切换" src="{:U('Book/verify')}"  onClick="reloadcode()" style="cursor:pointer; vertical-align:middle; height:60px;" id="safecode" class="reloadverify">&nbsp;&nbsp;
+                                <a href="javascript:reloadcode();" style="color:#06C;">Can't see, please change a</a></p>
+	                    </span>
+	                    <span class="biaodan col-md-12">
+	                        <p class="biaodan_title"><b>Dietary Restrictions</b></p>
+	                        <p class="biaodan_p">
+	                        <input name="dietary" class="biao_in2" type="text" value=""  />
+	                        </p>
+	                    </span>
+                        
+	                    <span class="biaodan col-md-12">
+	                        <p class="biaodan_title"><b>SpecialRequests</b></p>
+	                        <p class="biaodan_p"><textarea name="content" rows="4" class="biao_in3" id="Content" onFocus="if(this.value=='Show us your special requests, and we could serve your trip better!') {this.value='';}this.style.color='#999';" onBlur="if(this.value=='') {this.value='Show us your special requests, and we could serve your trip better!';this.style.color='#999';}" maxlength="">Show us your special requests, and we could serve your trip better!</textarea>  </p>
+	                    </span>
+                        
+	                    <span class="biaodan col-md-12">
+	                        <p class="biaodan_title"><b>How do you find us</b></p>
+	                        <p class="biaodan_p">
+	                            <span><input name="findus[]" type="checkbox" class="biaodan_check" value="1">Google</span>
+                                <span><input name="findus[]" type="checkbox" class="biaodan_check" value="2">Facebook</span>
+                                <span><input name="findus[]" type="checkbox" class="biaodan_check" value="3">TripAdvisor</span>
+                                <span><input name="findus[]" type="checkbox" class="biaodan_check" value="4">Others</span>
+	                        </p>
+                            <p><input name="hfindus" class="biao_in2" type="text" onFocus="if(this.value=='Can input') {this.value='';}this.style.color='#999';" onBlur="if(this.value=='') {this.value='Can input';this.style.color='#999';}"  maxlength=""  /></p>
+	                    </span>
+	                    
+	                   
+	                    <div class="biao_btn"><input type="submit" value="Book" class="biao_t"/></div>
+	                    <div class="clearfix"></div>
+                       </div>
+                    </form>
+                     <script language="javascript">
+				
+		$(function(){
+		$("#message").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+
+    		return false;
+
+    		function success(data){
+
+
+
+    			if(data.status){
+
+
+					alert(data.info);
+    				window.location.href = data.url;
+
+
+
+    			} else {
+
+
+					alert(data.info);
+
+    				//刷新验证码
+
+
+
+    				$("#safecode").click();
+
+
+
+    			}
+
+
+
+    		}
+
+
+
+    	});
+});
+				</script>  
+                    <p style="color:#999;">For last minute booking, please call us at ***********to make sure you ban book the tour successfully. Thank you!</p>
+                    <div class="clear"></div>
+                </div>
+
+            </Div>
+             <include file="Public/right" />
+        </div>
+         <include file="Public/foot" />
+    </div>
+</section>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/pikaday.js"></script>
+<script>
+
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('datepicker'),
+        firstDay: 1,
+        minDate: new Date('2000-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [2000,2020]
+    });
+
+    </script>
+</block>

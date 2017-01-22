@@ -1,0 +1,92 @@
+<extend name="Public/base"/>
+<block name="style">
+<link rel="stylesheet" href="__JS__/codemirror/codemirror.css">
+<link rel="stylesheet" href="__JS__/codemirror/theme/{:C('codemirror_theme')}.css">
+</block>
+
+<block name="body">
+	<div class="main-title cf">
+		<h2>
+			编辑<eq name="channel" value="View">页面<else />样式</eq> [ 文件名：{$file_name} ]
+            <neq name="current_path" value="/">
+            [ 目录：                
+                <php>$current_arr = explode('/',$current_path); $parent_path = '';</php>
+                <volist name="current_arr" id="dir">
+                    <php>$parent_path .= '/' . $dir</php>
+                    <eq name="i" value="1">
+                        <a href="{:U('CodeEditor/lists',array('channel'=>$channel,'module'=>$module))}">全部</a>
+                    <else />
+                        <a href="{:U('CodeEditor/lists', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($parent_path)))}">{$dir}</a>
+                    </eq>
+                    <if condition="count($current_arr) gt $i"><i class="ca"></i></if>                    
+                </volist>
+                <i class="ca"></i>
+                {$file_name}
+            ]
+            </neq>
+		</h2>
+	</div>
+        <!-- 表单 -->
+    <form id="form" action="{:U('edit')}" method="post" class="form-horizontal">
+    <div class="form-item cf">
+        <div class="controls">
+            <label class="textarea"><textarea name="content" id="content">{$content}</textarea></label>
+        </div>        
+    </div>
+    <div class="form-item cf">
+    	<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">保 存</button>
+		<a class="btn btn-return" href="{$Think.cookie.__forward__}">返 回</a>
+        <input type="hidden" name="module" value="{$module}" />
+        <input type="hidden" name="channel" value="{$channel}" />
+        <input type="hidden" name="path" value="{$Think.get.path}" />
+    </div>
+    </form>
+</block>
+<block name="script">
+<script type="text/javascript" src="__JS__/codemirror/codemirror.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/xml.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/javascript.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/clike.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/php.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/css.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/htmlmixed.js"></script>
+<script type="text/javascript" src="__JS__/codemirror/html-hint.js"></script>
+<script type="text/javascript">
+highlight_subnav('{:U('CodeEditor/lists')}');
+$(document).ready(function() { 	   
+	//设置编辑器高度	
+	var editor = CodeMirror.fromTextArea(document.getElementById("content"), {		
+		lineNumbers     : true,
+		styleActiveLine : true,
+		mode            : "{$code_type}",
+		matchBrackets   : true,
+		indentUnit      : 4,	
+		height          : 500,
+		enterMode       : "keep",
+		theme           : "{:C('CODEMIRROR_THEME')}",
+		autofocus		: true,
+		autocorrect		: true,
+  	});		
+	
+	//自动高度
+    var $window = $(window);
+    $window.resize(function(){
+        var textarea_height = $('#main').height() - 118;
+		editor.setSize("100%",textarea_height);
+    }).resize();
+	
+	var pending;
+	editor.on('change',function(){
+		clearTimeout(pending);
+		pending = setTimeout(update, 500);
+	})
+	function looksLikeScheme(code) {
+    	return !/^\s*\(\s*function\b/.test(code) && /^\s*[;\(]/.test(code);
+    }
+	function update(){
+		$('#content').val(editor.getValue());
+	}
+});
+
+</script>
+</block>

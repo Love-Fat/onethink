@@ -1,0 +1,62 @@
+﻿<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="row" style="margin:20px 0px;">
+            <div class="col-sm-12">
+                <div class=" col-sm-12" id="container1">  
+                  <volist name="list" id="data">      
+                    <a class="col-sm-3 pic" title="{$data.title}" href="{:get_cover($data['cover_id'],'path')}">
+                    <img title="Locomotives Roundhouse"  src="{:get_cover($data['cover_id'],'path')}">
+                    <div class="pic_img_title">{$data.title}</div>
+                    </a>
+           		 </volist> 
+                </div>
+                <div class="pro_page">
+
+                        <article:page cate="$cat_id" listrow="$cateclass['list_row']" />
+
+                    </div>
+            </div>
+        </div>
+         <include file="Public/foot" />
+    </div>
+</section>
+<link rel="stylesheet" href="__CSS__/jquery-fullsizable.css" />
+<link rel="stylesheet" href="__CSS__/jquery-fullsizable-theme.css" />
+<script src="__JS__/jquery.touchSwipe.min.js"></script>
+<script src="__JS__/jquery.fullsizable.js"></script>
+<script>
+    $(function() {
+      $('.pic').fullsizable({
+        detach_id: 'container1'
+      });
+
+      $(document).on('fullsizable:opened', function(){
+        $("#jquery-fullsizable").swipe({
+          swipeLeft: function(){
+            $(document).trigger('fullsizable:next')
+          },
+          swipeRight: function(){
+            $(document).trigger('fullsizable:prev')
+          },
+          swipeUp: function(){
+            $(document).trigger('fullsizable:close')
+          }
+        });
+      });
+    });
+  </script>
+</block>

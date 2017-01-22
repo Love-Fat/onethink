@@ -1,0 +1,13 @@
+<Div class="col-sm-4 col-xs-0">
+                 <php>$right_list = M('Banner')->where(array('cid'=>4,'status'=>1))->order('sort asc')->limit('0,2')->select();</php>
+                <volist name="right_list" id="vo">
+                    <div class="side_plane">
+                    <a  href="{$vo.url}" target="_blank">
+                    <div class="plane_body centered">
+                       <img src="{:get_cover($vo['banner_id'],'path')}">
+                       <h4>{$vo.title}</h4>
+                    </div>
+                    </a>
+                </div>
+                 </volist>   
+             </Div>

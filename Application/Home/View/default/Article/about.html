@@ -1,0 +1,35 @@
+<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="col-sm-12">
+            <Div class="col-sm-8 about_us">
+             
+                {:W('Category/lists',array($catid,true,$cateclass['id']))} 
+                <div id="myTabContent" class="tab-content">
+                   <div class="tab-pane fade in active" >
+                              {$about.content} 
+                   </div>
+                </div>
+            </Div>
+            
+            <include file="Public/right" />
+            
+            
+          </div>
+          <include file="Public/foot" />
+    </div>
+</section>
+</block>

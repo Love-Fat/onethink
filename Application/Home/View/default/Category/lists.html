@@ -1,0 +1,8 @@
+
+   <ul id="myTab" class="nav nav-tabs">
+                   </li>
+                    <foreach name="category._" item="cate">    
+                     <li class='nav_li <eq name="cate.id" value="$current">active</eq>'><a href="{:U('lists/'.$cate['name'])}" data-toggle="tab">{$cate.title}</a></li>
+                    </foreach> 
+                  
+                </ul>

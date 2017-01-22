@@ -1,0 +1,50 @@
+﻿<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="col-sm-12">
+            <div class="plane_group" id="accordion">
+
+				<php>
+        $Document = M('Document');
+        $faq_list=$Document->table(C('DB_PREFIX')."document as a")->join('left join '.C('DB_PREFIX').'document_article as b on a.id=b.id')->where("category_id=".$cateclass['id'].' and a.status=1')->order('level desc,create_time desc')->select();
+        </php>
+        <volist name="faq_list" id="vo" key="k">
+                <div class="panel panel-default">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$k}">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"  id="{$k}">
+                         {$k}.{$vo.title}
+                          <i class="fa fa-question-circle"></i>        
+                      </h4>
+                    </div>
+                  </a>
+                  <div id="collapse{$k}" class="panel-collapse collapse <php>if($k==1){</php>in<php>}</php>">
+                    <div class="panel-body">
+                     {$vo.content}
+                    </div>
+                  </div>
+                </div>
+            </volist>
+         
+                
+                
+            </div>
+        </div>
+        <include file="Public/foot" />
+    </div>
+</section>
+<script src="__JS__/bootstrap.min.js"></script>
+</block>

@@ -1,0 +1,3 @@
+ <foreach name="category._" item="cate">    
+            <a class="btn btn-default <eq name="cate.id" value="$current">active</eq>" href="{:U('lists/'.$cate['name'])}" >{$cate.title}</a>
+            </foreach> 

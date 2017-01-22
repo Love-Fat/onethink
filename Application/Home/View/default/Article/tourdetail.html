@@ -1,0 +1,105 @@
+<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-8">
+            <div class="galleria">
+            <volist name=":explode(',',$info['itemimg'])" id="album">
+                 <img src="{:get_cover($album, 'path')}" class="invisible" width="750" height="400">
+            </volist>
+            </div>
+          </div>
+          <!-- End Galleria -->
+            <div class="col-md-4 col-sm-4">
+                <div class="panel side-panel" id="tour-at-glance">
+                    <div class="panel-body">
+                        <div id="tour-at-glance-begin">
+                        </div>
+                        <div id="tour-at-glance-content">
+                        <p class="panel-head"><i class="fa fa-clock-o"></i>Time:</p>
+                        <pre class="pre_title"><p>{$info.tour_time}</p></pre>
+                        <p class="panel-head"><i class="fa fa-flag-o"></i>Where:</p>
+                       <pre class="pre_title"><p>{$info.tour_where}</p></pre>
+                        <p class="panel-head"><i class="fa fa-info-circle"></i>Tour Style:</p>
+                        <pre class="pre_title"><p>{$info.tour_style}</p></pre>
+                        <p class="panel-head"><span class="icon-forkspoon"></span>Food Theme:</p>
+                        <pre class="pre_title"><p>{$info.food_theme}</p></pre>
+                        <p class="panel-head"><i class="fa fa-warning"></i>Notes:</p>
+                        <pre class="pre_title"><p>{$info.tour_notes}</p></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <Div class="row" id="bottom-part">
+            <div class="col-sm-8">
+                <ul class="nav nav-tabs" id="tour-tab">
+                <li class="active"><a href="#Itinerary" data-toggle="tab">Itinerary</a></li>
+                <li><a href="#Price" data-toggle="tab">Price</a></li>
+                <li><a href="#Inclusion" data-toggle="tab">Inclusion/Exclusion</a></li>
+                <li><a href="#Condition" data-toggle="tab">Condition</a></li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Detail Tab -->
+                    <article class="tab-pane fade in active" id="Itinerary">
+                      {$info.tour_itinerary}
+                      <div class="row" id="bottom-btns">
+                            <hr class="col-sm-0 col-xs-0">
+                            <div class="col-md-6 col-sm-0 col-xs-0">
+                            <a href="{:U('book/index',array('id'=>$info['id']))}"><button type="button" class="btn btn-lg btn-primary">BUY TICKET</button></a>
+                            </div>
+                            <div class="col-md-6 col-sm-0 col-xs-0">
+                            <a href="{:U('lists/contact-us')}"><button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#contact-modal">CONTACT US</button></a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- End Detail Tab -->
+                    <!-- Detail Tab -->
+                    <article class="tab-pane fade" id="Price">
+                      {$info.tour_price}
+                    </article>
+                    <!-- End Detail Tab -->
+                    <!-- Detail Tab -->
+                    <article class="tab-pane fade" id="Inclusion">
+                     {$info.tour_exclusion}
+                    </article>
+                    <!-- End Detail Tab -->
+                    <!-- Detail Tab -->
+                    <article class="tab-pane fade" id="Condition">
+                      {$info.tour_condition}
+                    </article>
+                    
+                </div>
+            </div>
+            <include file="Public/right" />
+        </Div> 
+        <include file="Public/foot" />
+    </div>
+</section>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/galleria-1.3.5.min.js"></script>
+<script>
+            Galleria.loadTheme('__JS__/galleria.classic.min.js');
+            Galleria.run('.galleria', {
+              autoplay: 8000,
+              transition: 'fade',
+              popupLinks: true,
+              thumbnails: 'empty',
+              preload: 1,
+              imageCrop: true
+            });
+</script>
+</block>

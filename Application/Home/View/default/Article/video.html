@@ -1,0 +1,57 @@
+﻿<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="margin-top:30px;">
+            
+             <volist name="list" id="data">      
+                  
+                <div class="col-sm-4">
+                        <div class="plane_tour">
+                            <a href="{$data.link_url}" target="_blank">
+                            <div class="plane">
+                                <div class="plane_ima">
+                                    <div class="hover_info">
+                                        <button type="button" class="btn btn-inver">Read More</button>
+                                    </div>
+                                    <img src="{:get_cover($data['cover_id'],'path')}">
+                                </div>
+                                <div  class="plane_info2">
+                                        <div class="plane_bor">
+                                            <div class="col-lg-11 plane_t">{$data.title}</div>
+                                            <div class="col-lg-1 plane_jt" >></div>
+                                            <Div class="clearfix"></Div>
+                                        </div>
+                                        <Div class="clearfix"></Div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+      </volist> 
+                    
+
+            </div>
+             <div class="pro_page">
+
+                        <article:page cate="$cat_id" listrow="$cateclass['list_row']" />
+
+                    </div>
+        </div>
+         <include file="Public/foot" />
+    </div>
+</section>
+</block>

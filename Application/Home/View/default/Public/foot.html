@@ -1,0 +1,6 @@
+<div class="col-sm-12">
+<php>$foot_bg = M('Banner')->where(array('cid'=>2,'status'=>1))->find();</php>
+            <div class="gg">
+                <a href="{$foot_bg.url}" target="_blank"><img src="{:get_cover($foot_bg['banner_id'],'path')}"></a>	
+            </div>
+        </div>

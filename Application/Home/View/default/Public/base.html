@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><block name="title">{:C('WEB_HOME_TITLE')}</block></title>
+<meta name="keywords" content="<block name="keywords">{:C('WEB_SITE_KEYWORD')}</block>" />
+<meta name="description" content="<block name="description">{:C('WEB_SITE_DESCRIPTION')}</block>" />
+<!-- Bootstrap -->
+<link href="__CSS__/stylesheet.css" rel="stylesheet">
+<link href="__CSS__/main.css" rel="stylesheet">
+<link href="__CSS__/index_i.css" rel="stylesheet">
+<script src="__JS__/jquery.min.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<!-- 响应式导航 -->
+<header class="">
+    <nav class="navbar-default navbar navbar-fixed-top navbar-fixed-top-c-and-u" role="navigation">
+        <div class="header-one">
+            <div class="container">
+                <div class="row">
+                    <nav class="col-md-12">
+                        <ul style="float:right;">
+                        <li class="new-header-li post-requirement-li"><a href=""><img src="__IMG__/email_06.png">Email:lilychinatours@hotmail.com</a></li>
+                        <li class="new-header-li talk-to-lawyer-li"><a href=""><img src="__IMG__/tel_06.png">TEL:(0086)18629295068</a></li>
+                        <li class="tripadvisor-s"><a href="" target="_blank" id="tripadvisor"></a></li>
+                            <li class="facebook-s xs-0"><a href="" target="_blank" id="facebook"></a></li>
+                            <li class="youtube-s xs-0"><a href="" target="_blank" id="youtube"></a></li>
+                            <li class="twitter-s xs-0"><a href="" target="_blank" id="twitter"></a></li>
+                        </ul>
+                        <Div class="clearfix"></Div>
+                        <div class="clearfix"></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-right offcanvas " role="navigation">
+                <ul class="nav navmenu-nav">
+                    <li class="my-nav-ul-li"><a class="my-nav-ul-li-a" href="/">Home</a></li>
+                    <think:nav name="nav" tree="true">
+                    <li class="my-nav-ul-li"><a class="my-nav-ul-li-a" href="{:U($nav['url'])}">{$nav.title}</a></li>
+                  </think:nav>   
+                </ul>
+            </nav>
+            <div class="navbar navbar-default navbar-fixed-top some-header-fix">
+                <button type="button" class="navbar-toggle" id="navbar-button-id" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-header navbar-header-after">
+                <a class="navbar-brand" href="/">
+                <img alt="Lawyered" id="lawyered-logo-header" src="__IMG__/logo_s.png">
+                </a>
+            </div>
+            <a class="cross-image-responsive" href="__IMG__/cross.caf14b9d4f68.png"></a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                    <img alt="Lawyered" id="lawyered-logo-header" src="__IMG__/logo_03.png">
+                    </a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="top-links"><a class="links-a"  href="/">Home</a></li>
+                     <think:nav name="nav" tree="true">
+                    <li class="top-links"><a class="links-a" href="{:U($nav['url'])}">{$nav.title}</a></li>
+                  </think:nav>   
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<block name="body"></block>
+<section class="foot_box">
+    <div class="container">
+        <Div class="foot_title">
+        <h3>Why Choose Us</h3>
+        </Div>
+        <div class="container-fluid kuaijie">
+            <div class="rows">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-zdlg-2-5 col-red-border">
+                    <div class="foot_img"><img src="__IMG__/hou_03.png">Quick Response</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-zdlg-2-5 col-red-border">
+                	<div class="foot_img"><img src="__IMG__/kef_05.png">1on1Tour Planning</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-zdlg-2-5 col-red-border">
+                	<div class="foot_img"><img src="__IMG__/xin_08.png">High-level service</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-zdlg-2-5 col-red-border">
+                	<div class="foot_img"><img src="__IMG__/zhif_10.png">Secured Online Payment</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-zdlg-2-5 col-red-border">
+                	<div class="foot_img"><img src="__IMG__/s_03.png">No Hidden Fees and Traps</div>
+                </div>
+            </div>
+        </div>
+        <div class="foot_midle">
+            <p class="col-sm-12 foot_link"><a href="{:U('lists/contact-us')}" class="">Contact Us</a>     |      <a href="{:U('lists/faqs')}">FAQS</a>     |      <a href="{:U('book/index')}">Book</a>      </p>
+            <p class="col-sm-12">{:C('WEB_COPYRIGHT')}</p>
+           
+        </div>
+    </div>
+</section>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="__JS__/jasny-bootstrap.min.f7206b56475c.js"></script>
+<script src="__JS__/main.js"></script>
+<script src="__JS__/lib.js"></script>
+<script type="text/javascript">
+$(".news_img").hover(function(){
+    $(this).find(".txt").stop().animate({height:"404px"},400);
+	$(this).find(".txt h3").stop().animate({paddingTop:"0px"},400);
+	},function(){
+	$(this).find(".txt").stop().animate({height:"40px"},400);
+	$(this).find(".txt h3").stop().animate({paddingTop:"0px"},400);
+})
+$(".news_img1").hover(function(){
+    $(this).find(".txt1").stop().animate({height:"193px"},400);
+	$(this).find(".txt1 h3").stop().animate({paddingTop:"0px"},400);
+	},function(){
+	$(this).find(".txt1").stop().animate({height:"40px"},400);
+	$(this).find(".txt1 h3").stop().animate({paddingTop:"0px"},400);
+})
+</script>
+</body>
+</html>

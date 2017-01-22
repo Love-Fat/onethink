@@ -1,0 +1,229 @@
+﻿<extend name="Public/base" />
+<block name="body">
+<div id="banner-box">
+    <div id="banner">
+    	<php>$banner = M('Banner')->where(array('cid'=>1,'status'=>1))->limit(0,10)->order('sort ASC')->select();</php>
+          <volist name="banner" id="vo">
+     		<div>									
+                <a href="{$vo.url}" target="_blank" title="{$vo.title}" style="background-image: url({:get_cover($vo['banner_id'],'path')})"></a>											
+         </div>
+          </volist>   
+    </div>
+</div>
+<section class="you-create-we-secure">
+    <div class="container">
+        <div class="main_box">
+            <p>{:C('WEB_BANNER_TITLE')}</p>
+        </div>
+    </div>
+</section>
+<section id="landing-feature-showoff">
+    <div class="container">
+        <Div class="row feature-top-line title_bg">
+            <h2>Xi’an Food Tours</h2>
+        </Div>
+        <div class="row">
+            <div class="col-sm-12">
+            
+              
+                
+                <article:list name="vo" category="1" row="4">
+                <div class="col-sm-3">
+                    <div class="pro_box_bor{$key+1}">
+                        <a href="{:U('detail/'.$vo['id'])}"><img src="{:get_cover($vo['cover_id'],'path')}"></a>
+                        <a href="{:U('detail/'.$vo['id'])}"><h2 class="h2-inside-a-link">{$vo.title}</h2></a>
+                        <a href="{:U('detail/'.$vo['id'])}"><p>{$vo.description|msubstr='0','50'}</p></a>
+                    </div>
+                </div>
+             </article:list> 
+            </div>
+        </div>
+        <div class="col-sm-12">
+        <a href="{:U('lists/xian-food-tours')}"><button class="more">SEE MORE TOURS</button></a>
+        </div>
+    </div>
+    
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <Div class="pro_box_video biankuang">
+                        <div class="pro_title">
+                            <h3>Video</h3>
+                        </div>
+                        <article:position name="vo" cate="33" limit="1" pos="4">
+                        <div class="pro_video_mai"><a href="{$vo.link_url}" target="_blank"><img src="{:get_cover($vo['cover_id'],'path')}"></a></div>
+                        </article:position>  
+                        <div class="col-sm-12"><a href="{:U('lists/video')}" class="pro_more">More >></a></div>
+                        <Div class="clearfix"></Div>
+                    </Div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="pro_blog">
+                        <div class="pro_blog_title">
+                            <a href="{:U('lists/review')}" class="blog_more">Mores</a>
+                            <h3>What our culinary travellers say..</h3>
+                        </div>
+                        <div class="blog_cont">
+                            <Div class="row">
+                                <div class="col-sm-12">
+                                <article:list name="vo" category="12" row="4">           
+                                    <div class="col-sm-6">
+                                        <div class="blog_face">
+                                            <img src="{:get_cover($vo['cover_id'],'path')}">
+                                            <h4>{$vo.title|msubstr='0','25'}</h4>
+                                            <p>{$vo.description|msubstr='0','60'}</p>
+                                            <small><a href="{:U('lists/review')}">+More</a></small>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    </article:list> 
+                                    
+                                </div>
+                            </Div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="plane_cont">
+    <Div class="container">
+        <Div class="row feature-top-line title_bg">
+            <h2>Xi’an Non Food Tours</h2>
+        </Div>
+        <div class="row">
+            <div class="plane_pa">
+                <div class="col-sm-12">
+                
+                
+                  <article:list name="vo" category="3" row="3">           
+                              
+                    <div class="col-sm-4">
+                        <div class="plane_tour">
+                            <a href="{:U('detail/'.$vo['id'])}">
+                            <div class="plane">
+                                <div class="plane_ima">
+                                    <div class="hover_info">
+                                        <button type="button" class="btn btn-inver">Read More</button>
+                                    </div>
+                                    <img src="{:get_cover($vo['cover_id'],'path')}">
+                                </div>
+                                <div  class="plane_info1">
+                                        <div class="plane_bor">
+                                            <div class="col-lg-11 plane_t">{$vo.title|msubstr='0','25'}</div>
+                                            <div class="col-lg-1 plane_jt" >></div>
+                                            <Div class="clearfix"></Div>
+                                        </div>
+                                        <div class="col-sm-12 plane_p">
+                                            <p>{$vo.description|msubstr='0','60'}</p>
+                                        </div>
+                                        <Div class="clearfix"></Div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                 </article:list> 
+                      
+                    <Div class="clearfix"></Div>
+                </div>
+                <Div class="clearfix"></Div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <a href="{:U('lists/xian-non-food-tours')}"><button class="more">SEE MORE TOURS</button></a>
+        </div>
+    </Div>
+    
+</section>
+<section class="walk_tour">
+    <div class="container">
+        <Div class="row feature-top-line title_bg">
+            <h2>What’s  New</h2>
+        </Div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="tour_cont">
+                 <article:position name="vo" cate="32" limit="1" pos="4">
+                      
+                    <a href="{:U('detail/'.$vo['id'])}">
+                    <div class="news_img" >
+                        <img src="__IMG__/tour_37.jpg">
+                        <div class="txt">
+                             <h3>{$vo.title}</h3>
+                            <p>{$vo.description}</p> 
+                        </div>
+                    </div>
+                    </a>
+                      </article:position>  
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                
+                 <article:list name="vo" category="32" row="6">
+                  			
+                    <div class="col-sm-4">
+                        <div class="tour_cont1">
+                            <a href="{:U('detail/'.$vo['id'])}">
+                            <div class="news_img1" >
+                                <img src="{:get_cover($vo['cover_id'],'path')}">
+                                <div class="txt1">
+                                    <h3>{$vo.title}</h3>
+                                    <p>{$vo.description}</p>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+             </article:list>
+                    
+                </div>    
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <a href="{:U('lists/news')}"><button class="more">SEE MORE NEWS</button></a>
+        </div>
+    </div>
+    
+</section>
+<section class="plane_cont">
+    <Div class="container">
+        <Div class="row feature-top-line title_bg">
+            <h2>Find Us In</h2>
+        </Div>
+        <div class="row">
+            <div class="plane_pa">
+                <div class="col-sm-12">
+                 <php>$findus_list = M('Banner')->where(array('cid'=>3,'status'=>1))->order('sort asc')->limit('0,3')->select();</php>
+                  <volist name="findus_list" id="vo">
+                    <div class="col-sm-4">
+                        <div class="plane_tour">
+                            <a href="{$vo.url}" target="_blank">
+                            <div class="plane">
+                                <div class="plane_ima">
+                                    <div class="hover_info">
+                                        <button type="button" class="btn btn-inver">Read More</button>
+                                    </div>
+                                    <img src="{:get_cover($vo['banner_id'],'path')}">
+                                </div>
+                                <Div class="city_title">{$vo.title}</Div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                  </volist>   
+                      
+                    <Div class="clearfix"></Div>
+                </div>
+                <Div class="clearfix"></Div>
+            </div>
+        </div>
+    </Div>
+    
+</section>
+</block>

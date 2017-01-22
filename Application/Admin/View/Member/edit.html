@@ -1,0 +1,65 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>新增用户</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+    <input type="hidden" name="id" value="{$memberlist.id}" />
+        <div class="form-item">
+            <label class="item-label">登录号<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="{$memberlist.username}" disabled="disabled">
+            </div>
+        </div>
+       
+        <div class="form-item">
+            <label class="item-label">真实姓名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="uname" value="{$memberlist.uname}">
+            </div>
+        </div>
+        
+        
+        <div class="form-item">
+            <label class="item-label">性别<span class="check-tips"></span></label>
+            <div class="controls">
+               <input name="sex" type="radio" value="1" <php> if($memberlist['sex']==1){ </php> checked="checked"   <php> } </php> /> 男  <input name="sex" type="radio" value="2" <php> if($memberlist['sex']==2){ </php> checked="checked"   <php> } </php> /> 女
+            </div>
+        </div>
+        
+      
+        <div class="form-item">
+            <label class="item-label">邮 箱<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="email" value="{$memberlist.email}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">手机号码<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="phone" value="{$memberlist.phone}">
+            </div>
+        </div>
+          <div class="form-item">
+            <label class="item-label">地址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="phone"  value="{$memberlist.address}">
+            </div>
+        </div>
+
+        
+        
+        <div class="form-item">
+          
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Member/index')}');
+    </script>
+</block>

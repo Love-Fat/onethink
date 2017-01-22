@@ -1,0 +1,37 @@
+﻿<extend name="Public/base" />
+<block name="title">“{$keyword}”的搜索结果-{:C('WEB_SITE_TITLE')}</block>
+<block name="keywords">“{$keyword}”的搜索结果-{:C('WEB_SITE_KEYWORD')}</block>
+<block name="description">“{$keyword}”的搜索结果-{:C('WEB_SITE_DESCRIPTION')}</block>
+<block name="body">
+<Div class="n_banenr w1200">
+<img src="{:get_cover($cateinfo['icon'],'path')}" width="1200" height="330" /> 
+</Div>
+<div class="w1200">
+    <div class="ma_top">
+         {:W('Category/lists',array(1,true,$cateclass['id']))} 
+    </div>
+    <div class="w920 new_bor fr">
+        <div class="breadCrumb">
+                <p class="fr">您现在的位置：<a href="/">首页</a><span> >> </span><a class="bc" href="JavaScript:void(0);">搜索结果</a></p>
+                <i>搜索结果</i>
+        </div>
+        <div class="main_pro_box">
+            <div class="list_box">
+                <ul class="news_box_ul">
+                       <volist name="list" id="data">    
+                             <li><span class="time1 fr">{$data.create_time|date='Y-m-d',###}</span><a href="{:U('detail/'.$data['id'])}" title="{$data.title}">{$data.title}</a></li>
+                             </volist> 
+ 					 <Div class="clear"></Div>
+                       
+                </ul>
+                  <div class="pro_page">
+
+                        {$page}
+
+                    </div>
+            </div>
+         </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</block>

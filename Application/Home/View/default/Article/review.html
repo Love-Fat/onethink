@@ -1,0 +1,85 @@
+﻿<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="row">
+        <php>$rev_list = M('Banner')->where(array('cid'=>5,'status'=>1))->order('sort asc')->limit('0,3')->select();</php>
+        	<volist name="rev_list" id="vo">
+            <div class="col-sm-4">
+                <div class="side_plane">
+                    <a href="{$vo.url}" target="_blank">
+                    <div class="plane_body centered">
+                    <img src="{:get_cover($vo['banner_id'],'path')}">
+                    <h4>{$vo.title}</h4>
+                    </div>
+                    </a>
+                 </div>
+            </div>
+          </volist>   
+            
+        </div>
+        <!-- Tab Reviews -->
+<div class="tab-pane fade in active" id="reviews-tab">
+<div class="row">
+<!-- Sample Reviews -->
+<div class="col-md-12 centered">
+<h2>What our culinary travellers say</h2>
+</div>
+ <php>
+        $Document = M('Document');
+        $revuew_list=$Document->table(C('DB_PREFIX')."document as a")->join('left join '.C('DB_PREFIX').'document_article as b on a.id=b.id')->where("category_id=".$cateclass['id'].' and a.status=1')->order('level desc,create_time desc')->select();
+        </php>
+<!-- Left Column -->
+<div class="col-md-6">
+
+<volist name="revuew_list" id="vo" key="k">
+<php>
+if($k%2!=0)
+{
+</php>
+<blockquote class='face'><img src="{:get_cover($vo['cover_id'],'path')}" class='img-circle' width='75'  height='75'><p>{$vo.content}</p><small><a href='{$vo.link_url}' target="_blank">{$vo.title}</small></a>
+</blockquote>
+<php>
+}
+</php>
+</volist>
+
+</div>
+<!-- End Left Column -->
+<!-- Right Column -->
+<div class="col-md-6">
+<volist name="revuew_list" id="vo" key="k">
+<php>
+if($k%2==0)
+{
+</php>
+<blockquote class='face right'><img src="{:get_cover($vo['cover_id'],'path')}" class='img-circle' width='75'  height='75'><p>{$vo.content}</p><small><a href='{$vo.link_url}' target="_blank">{$vo.title}</small></a>
+</blockquote>
+<php>
+}
+</php>
+</volist>
+</div>
+<!-- End Right Column -->
+<!-- End Sample Reviews -->
+<div class="clear"></div>
+</div>
+</div>
+<!-- End Tab Reviews -->
+         <include file="Public/foot" />
+    </div>
+    
+</section>
+</block>

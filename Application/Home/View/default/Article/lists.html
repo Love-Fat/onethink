@@ -1,0 +1,53 @@
+﻿<extend name="Public/base" />
+<block name="title">{$title}</block>
+<block name="keywords">{$keywords}</block>
+<block name="description">{$description}</block>
+
+<!--main-->
+<block name="body">
+<section class="banner_line"></section>
+<!-- Page Title --> 
+<section id="title">
+    <div style="background:url({:get_cover($cateinfo['icon'],'path')}) no-repeat top center">
+	</div>
+</section>
+<!-- End Page Title --> 
+<section class="main_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="news">
+                        <ul class="col-sm-12">
+                        
+                          <volist name="list" id="data">    
+                             
+                            <div class="col-sm-3">
+                                <div class="tour_cont1">
+                                    <a href="{:U('detail/'.$data['id'])}">
+                                    <div class="news_img1" >
+                                        <img src="{:get_cover($data['cover_id'],'path')}">
+                                        <div class="txt1">
+                                            <h3>{$data.title}</h3>
+                                            <p>{$data.description}</p>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            </volist> 
+                             
+                         </ul>
+						  <div class="pro_page">
+
+                        <article:page cate="$cat_id" listrow="$cateclass['list_row']" />
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <include file="Public/foot" />
+    </div>
+</section>
+</block>

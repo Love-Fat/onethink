@@ -1,0 +1,207 @@
+<extend name="Public/base"/>
+<block name="style">
+<style type="text/css">
+.tpl-editor-mod{width:140px;}
+#upload_file{margin-right:5px;}
+#upload_file #upload_file-button{background:#4bbd00;}
+.icon{display:inline-block; width:18px; height:16px; background:url(__IMG__/file_list_icon.png) no-repeat -115px -45px; margin-right:3px;}
+.dir-icon{background-position:-1px -1px; }
+.css-icon{background-position:-1px -67px;}
+.html-icon,.html-icon{background-position:-25px -67px;}
+.js-icon{background-position:-47px -67px;}
+.php-icon{background-position:-70px -67px;}
+.rar-icon,.zip-icon{background-position:-1px -45px;}
+.doc-icon,.docx-icon{background-position:-24px -45px;}
+.xls-icon,.xml-icon{background-position:-47px -45px;}
+.txt-icon,.md-icon{background-position:-70px -45px;}
+.ppt-icon{background-position:-94px -45px;}
+.pdf-icon{background-position:-137px -45px;}
+.psd-icon{background-position:-1px -23px;}
+.mp3-icon,.wma-icon,.wav-icon{background-position:-47px -23px;}
+.jpg-icon,.png-icon,.gif-icon,.bmp-icon,.jpeg-icon{background-position:-70px -23px;}
+.mp4-icon,.flv-icon,.swf-icon,.wmv-icon,.rmvb-icon,.avi-icon,.ogv-icon,.webm-icon{background-position:-94px -23px;}
+.adv-sch-pannel label.make-dir-name{width:auto;}
+</style>
+</block>
+
+<block name="body">
+	<!-- 标题 -->
+	<div class="main-title">
+		<h2>
+		<eq name="channel" value="View">页面列表<else />样式列表</eq> [
+		通道：<neq name="channel" value="View"><a href="{:U('CodeEditor/lists',array('channel'=>'View'))}">页面</a><else/>页面</neq>&nbsp;
+		<neq name="channel" value="Style"><a href="{:U('CodeEditor/lists',array('channel'=>'Style'))}">样式</a><else/>样式</neq>&nbsp;]
+		<neq name="current_path" value="/">
+		[ 目录：
+		    <php>$current_arr = explode('/',$current_path); $parent_path = '';</php>
+            <volist name="current_arr" id="dir">
+                <php>$parent_path .= '/' . $dir</php>
+                <eq name="i" value="1">
+                    <a href="{:U('CodeEditor/lists',array('channel'=>$channel,'module'=>$module))}">全部</a>
+                <else />
+                    <a href="{:U('CodeEditor/lists', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($parent_path)))}">{$dir}</a>
+                </eq>
+                <if condition="count($current_arr) gt $i"><i class="ca"></i></if>
+            </volist>
+        ]
+        </neq>		
+		</h2>
+	</div>
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<!-- 按钮工具栏 -->
+	<div class="cf">
+		<div class="fl">
+			<div class="btn-group">
+				<button class="btn tpl-editor-mod" url="{:U('CodeEditor/lists',array('channel'=>$channel,'module'=>$module))}">模块：{$module}
+					<if condition="count($modules) gt 3"><i class="btn-arrowdown"></i></if>
+				</button>
+				<if condition="count($modules) gt 3">
+				<ul class="dropdown nav-list tpl-editor-mod">
+					<volist name="modules" id="vo" offset="2">
+					<li><a href="{:U('CodeEditor/lists',array('channel'=>$channel,'module'=>$vo))}">{$vo}</a></li>
+					</volist>
+				</ul>
+				</if>                
+			</div>            
+		</div>
+        
+        <div class="fl">
+        	<input type="file" class="btn" id="upload_file" value="上传" />
+            <script type="text/javascript">
+            	$('#upload_file').uploadify({
+					"height"			: 30,
+					'width'				: 100,
+					'swf' 				: '__STATIC__/uploadify/uploadify.swf',
+					"buttonText"		: "上传文件",
+					"uploader"			: "{:U('CodeEditor/upload',array('channel'=>$channel, 'module'=>$module, 'path'=>think_encrypt($current_path), 'session_id'=>session_id()))}",
+					"onUploadSuccess"	: uploadFile,
+					'onFallback'		: function() {
+						alert('未检测到兼容版本的Flash.');
+					}
+				})
+				function uploadFile(file, data){
+					var data = $.parseJSON(data);
+					var src = '';
+					if(data.status){
+						if (data.url) {
+							updateAlert(data.info + ' 页面即将自动跳转~','alert-success');
+						}else{
+							updateAlert(data.info ,'alert-success');
+						}
+						setTimeout(function(){
+							$('#upload_file').removeClass('disabled').prop('disabled',false);
+							if (data.url) {
+								location.href=data.url;
+							}else if($('#upload_file').hasClass('no-refresh')){
+								$('#top-alert').find('button').click();
+							}else{
+								location.reload();
+							}
+						},1500);
+					} else {
+						updateAlert(data.info);
+						setTimeout(function(){
+							$('#top-alert').find('button').click();
+							$(that).removeClass('disabled').prop('disabled',false);
+						},1500);
+					}
+				}
+            </script>
+        </div>
+        
+        <div class="search-form cf">
+            <div class="btn-group-click  adv-sch-pannel fl">
+                <button class="btn makedir">新建文件夹 <i class="btn-arrowdown"></i></button>
+                <div class="dropdown cf">
+                    <div class="row">
+                        <label class="make-dir-name">文件夹名称：</label>
+                        <input type="text" id="dirname" name="dirname" class="text input-2x" value="" placeholder="新建文件夹" />
+                        <input type="hidden" name="channel" value="{$channel}" />
+                        <input type="hidden" name="module" value="{$module}" />
+                        <input type="hidden" name="path" value="{:think_encrypt($current_path)}" />
+                        <button class="btn ajax-post"  target-form="search-form" url="{:U('CodeEditor/makeDir')}">确定</button>
+                    </div>
+                </div>
+            </div>
+    	</div>
+	</div>
+    
+
+	<!-- 数据表格 -->
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                	<th>文件名</th>
+                    <th width="10%">文件大小</th>
+                    <th width="18%">创建时间</th>
+                    <th width="18%">修改时间</th>
+                    <th width="10%">操作</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody>
+                <volist name="list['dir']" id="data">
+                    <tr>
+                        <td><span class="icon dir-icon"></span> <a href="{:U('CodeEditor/lists', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}">{$data.name}</a></td>
+                        <td>{$data.size|format_bytes}</td>
+                        <td>{$data.create_time|time_format="Y/m/d H:i:s"}</td>
+                        <td>{$data.update_time|time_format="Y/m/d H:i:s"}</td>
+                        <td>
+                        	<a href="{:U('CodeEditor/lists', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}">打开</a>
+                            <a href="{:U('CodeEditor/delete', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}" class="ajax-get confirm">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                <php>$support_extension = array('html','shtml','htm','css','js','xml','php','asp','aspx','jsp','txt','md');</php>
+                <volist name="list['file']" id="data">
+                    <tr>
+                        <td><span class="icon {$data.extension}-icon"></span>
+                         <if condition="in_array_case($data['extension'],$support_extension) eq true">
+                         	<a href="{:U('CodeEditor/edit', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}">{$data.name}</a>
+                         <elseif condition="$channel eq 'Style'" />
+                         	<a href="__ROOT__/Public/{$module}{:rtrim($current_path,'/')}/{$data['name']}" target="_blank">{$data.name}</a>
+                         <else />
+                         	{$data.name}
+                         </if>
+                         </td>
+                        <td>{$data.size|format_bytes}</td>
+                        <td>{$data.create_time|time_format="Y/m/d H:i:s"}</td>
+                        <td>{$data.update_time|time_format="Y/m/d H:i:s"}</td>
+                        <td>
+                        <if condition="in_array_case($data['extension'],$support_extension) eq true">
+                             <a href="{:U('CodeEditor/edit', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}">编辑</a>
+                        <elseif condition="$channel eq 'Style'" />
+                         	<a href="__ROOT__/Public/{$module}{:rtrim($current_path,'/')}/{$data['name']}" target="_blank">查看</a>
+                        </if>
+                        <a href="{:U('CodeEditor/delete', array('channel'=>$channel,'module'=>$module, 'path'=>think_encrypt($current_path . '/' . $data['name'])))}" class="ajax-get confirm">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+	</div>
+</div>
+
+</block>
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+highlight_subnav('{:U('CodeEditor/lists')}');
+$(function(){	
+	//只有一个模型时，点击新增
+	$('.tpl-editor-mod').click(function(){
+		var url = $(this).attr('url');
+		if(url != undefined && url != ''){
+			window.location.href = url;
+		}
+	});
+})
+</script>
+</block>
